@@ -129,6 +129,11 @@ if [ "A$must_build" == "Atrue" ]; then
         echo "onnxruntime-gpu build is not currently working with CUDA 13.2. For more details see https://github.com/microsoft/onnxruntime/issues/28023 (when this is marked as fixed, please let me know so I can update the script)"
         exit 0
     fi
+    # or CUDA 13.3 yet
+    if [ "$CUDA_VERSION" == "cuda13.3" ]; then
+        echo "onnxruntime-gpu build is not currently working with CUDA 13.3. For more details see https://github.com/microsoft/onnxruntime/issues/28023 (when this is marked as fixed, please let me know so I can update the script)"
+        exit 0
+    fi
 
     if pip3 show torch &>/dev/null; then
         torch_version=$(pip3 show torch | grep Version | awk '{print $2}' | cut -d'.' -f1-2)
@@ -181,7 +186,7 @@ find . -type f -name 'CMakeCache.txt' -delete
 ./build.sh \
     --config Release \
     --build_shared_lib \
-    --parallel 4 \
+    --parallel $CMAKE_BUILD_PARALLEL_LEVEL \
     --nvcc_threads 1 \
     --use_cuda \
     --cuda_home /usr/local/cuda \
