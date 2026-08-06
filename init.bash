@@ -649,7 +649,7 @@ if [ "$cuda_major" -lt 13 ]; then
   else # CUDA 12.9
     cuda_backend="cu129"
   fi
-else # CUDA 13.2 -- https://download.pytorch.org/whl/cu132 is now there, but uv does not yet support it -- staying with cu130 for now
+else # CUDA 13.2 -- https://download.pytorch.org/whl/cu132 is now there, and uv supports it -- but Comfy requires cu130 for now, so we will use that
 #  if [ "$cuda_minor" -gt 1 ]; then
 #    cuda_backend="cu132"
 #  else # CUDA 13.0 and 13.1 use the same wheel
