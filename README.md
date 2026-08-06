@@ -112,16 +112,17 @@ If this version is incompatible with your container runtime, please see the list
 
 | tag | aka | note |
 | --- | --- | --- |
-| ubuntu22_cuda12.2-latest | | Ubuntu 22 based image, depreacted as of `20260605` release -- see `Dockerfile/_off` for last used version |
-| ubuntu22_cuda12.3-latest | | Ubuntu 22 based image, to be depreacted in 2026 | 
-| ubuntu22_cuda12.4-latest | | Ubuntu 22 based image, to be depreacted in 2026 | 
-| ubuntu24_cuda12.5-latest | | was `latest` up to `20250320` release |
+| ubuntu22_cuda12.2-latest | | Ubuntu 22 base image, depreacted as of `20260605` release -- see `Dockerfile/_off` for last used version |
+| ubuntu22_cuda12.3-latest | | To be depreacted in 2026 | 
+| ubuntu22_cuda12.4-latest | | To be depreacted in 2026 | 
+| ubuntu24_cuda12.5-latest | | Ubuntu 24 base image, was `latest` up to `20250320` release |
 | ubuntu24_cuda12.6-latest | | was `latest` up to `20260509` release |
 | ubuntu24_cuda12.8-latest | | was `latest` up to `20260605` release -- minimum required for Blackwell (inc RTX 50xx) hardware (see "Blackwell support" section) |
 | ubuntu24_cuda12.9-latest | `latest` | `latest` as of `20260605` release -- upgrade needed due to ["... Deprecating CUDA 12.8 (Release 2.12)"]https://dev-discuss.pytorch.org/t/introducing-cuda-13-2-and-deprecating-cuda-12-8-release-2-12/3337) |
 | ubuntu24_cuda13.0-latest | | |
 | ubuntu24_cuda13.1-latest | | |
 | ubuntu24_cuda13.2-latest | | |
+| ubuntu24_cuda13.3-latest | | Ubuntu 26 base image, untested |
 
 For more details on driver capabilities and how to update those, please see [Setting up NVIDIA docker & podman (Ubuntu 24.04)](https://www.gkr.one/blg-20240523-u24-nvidia-docker-podman).
 
@@ -1026,6 +1027,7 @@ For more details, see [this thread on the Unraid forum](https://forums.unraid.ne
 
 # 7. Changelog
 
+- 20260805: Added compatibility for first Ubuntu 26.04 images + full ffmpeg/sqlite3 for sub-scripts + note: cu132 is now supported by uv but Comfy still prefers cu130 (torchaudio does not have a cu132 version)
 - 20260605: Added `UPDATE_UV` variable, moving `latest` to CUDA 12.9 release (following ["Introducing CUDA 13.2 and Deprecating CUDA 12.8 (Release 2.12)"](https://dev-discuss.pytorch.org/t/introducing-cuda-13-2-and-deprecating-cuda-12-8-release-2-12/3337) + deprecation of CUDA 12.2 release.
 - 20260509: As announced previously, updated `latest` to CUDA 12.8 release. No new features: maintenance release + updated CUDA 13.0. 13.1 and 13.2 versions.
 - 20260312: Added DGX Spark build and notes on Blackwell nvfp4 usage. Update all images to recent pacakges (unless a new feature is added and a rebuild is required, I likely will do this every couple of months to allow the image to stay up to date with published package fixes).

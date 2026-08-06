@@ -38,10 +38,15 @@ RUN apt-get update -y --fix-missing \
     && apt-get clean
 
 # UTF-8
-RUN localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
-ENV LANG=en_US.utf8
-ENV LC_ALL=C
+ENV LANG=en_US.UTF-8 \
+    LANGUAGE=en_US:en \
+    LC_ALL=C
 
+RUN apt-get update && apt-get install -y --no-install-recommends locales \
+  && locale-gen en_US.UTF-8 \
+  && update-locale LANG=en_US.UTF-8 \
+  && apt-get clean
+  
 # Install needed packages
 RUN apt-get update -y --fix-missing \
   && apt-get upgrade -y \
@@ -72,11 +77,15 @@ RUN apt-get update -y --fix-missing \
     libxext6 \
     libxrender1 \
     xdg-utils \
+    libcurl4-openssl-dev \
+    ffmpeg \
+    sqlite3 \
+    libsqlite3-dev \
   && apt-get clean
 
 # Add libEGL ICD loaders and libraries + Vulkan ICD loaders and libraries
 # Per https://github.com/mmartial/ComfyUI-Nvidia-Docker/issues/26
-RUN apt-get install -y --no-install-recommends libglvnd0 libglvnd-dev libegl1-mesa-dev libvulkan1 libvulkan-dev ffmpeg \
+RUN apt-get install -y --no-install-recommends libglvnd0 libglvnd-dev libegl1-mesa-dev libvulkan1 libvulkan-dev \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/* \
   && mkdir -p /usr/share/glvnd/egl_vendor.d \
