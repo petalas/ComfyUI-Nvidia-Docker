@@ -20,7 +20,7 @@ services:
       WANTED_UID: "1000"
       WANTED_GID: "1000"
       BASE_DIRECTORY: /basedir
-      USE_NEW_MANAGER: "true"
+      USE_NEW_MANAGER: "false"
       ENABLE_MANAGER_LEGACY_UI: "true"
       SECURITY_LEVEL: weak # adapt as prefered
       COMFY_CMDLINE_EXTRA: --use-sage-attention --bf16-unet --bf16-vae --bf16-text-enc
