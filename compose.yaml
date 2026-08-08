@@ -27,7 +27,7 @@ services:
       - SECURITY_LEVEL=normal
       # Disabling new ComfyUI Manager parameters (update to ComfyUI >= 0.5.0 before using)
       - USE_NEW_MANAGER=false
-      # in favor of legacy UI (with the new manager)
+      # in favor of legacy UI (without the new manager)
       - ENABLE_MANAGER_LEGACY_UI=true
       # NVIDIA GPU recommended parameters
       - NVIDIA_VISIBLE_DEVICES=all
