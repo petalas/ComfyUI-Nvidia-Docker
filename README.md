@@ -211,6 +211,7 @@ It is recommended that a container monitoring tool be available to watch the log
     - [6.4.1. using a specific ComfyUI version or SHA](#641-using-a-specific-comfyui-version-or-sha)
     - [6.4.2. Errors with ComfyUI WebUI -- re-installation method with models migration](#642-errors-with-comfyui-webui----re-installation-method-with-models-migration)
     - [6.4.3. Compatibility Warning: Frontend version ... is outdated](#643-compatibility-warning-frontend-version--is-outdated)
+    - [6.4.4. Updating ComfyUI](#644-updating-comfyui)
 - [7. Changelog](#7-changelog)
 
 # 1. Preamble
@@ -807,11 +808,6 @@ This will start a container and drop you into a bash shell as the `comfy` user w
 
 ## 5.7. Misc
 
-See [extras/FAQ.md] for additional FAQ topics, among which:
-- Updating ComfyUI
-- Updating ComfyUI-Manager
-- Installing a custom node from git
-
 ### 5.7.1. DGX Spark support
 
 As of the 20260312 release, a DGX Spark version of the image is available on DockerHub.
@@ -825,7 +821,7 @@ Please check [extras/dgx_spark-helper.sh](extras/dgx_spark-helper.sh) and [compo
 Recommended steps:
 
 - in the file where you place the `compose-dgx_spark.yml` file (ie renamed as `compose.yaml` for convention in the rest of this explanation), create two folders as the same user ID as the one used to start the container (usually `1000:1000`): `mkdir run basedir`
-- obtain a copy of [userscripts_dir.tar.gz](https://github.com/mmartial/ComfyUI-Nvidia-Docker/blob/main/assets/userscripts_dir.tar.gz) file and uncompress it in the same folder where your `compose.yaml` is. `tar xvfj userscripts_dir.tar.gz` will create the `userscripts_dir` folder owned by `1000:1000` (`chown` accordingly). You will neeed to `chmod +x` files in there. The `compose.yaml` has a list of recommended numbers in the comments, they match the scripts "numbers". Use `chmod +x userscripts_dir/20-SageAttention2.sh` at minimum to allow the `--use-sage-attention` added to the `compose.yaml`. You will see a few other useful scripts there: 00, 05, 11, 12, 15, 21 for example.
+- obtain a copy of [userscripts_dir.tar.gz](https://github.com/mmartial/ComfyUI-Nvidia-Docker/blob/main/assets/userscripts_dir.tar.gz) file and uncompress it in the same folder where your `compose.yaml` is. `tar xvfj userscripts_dir.tar.gz` will create the `userscripts_dir` folder owned by `1000:1000` (`chown` accordingly). You will neeed to `chmod +x` files in there. The `compose.yaml` has a list of recommended numbers in the comments, they match the scripts "numbers". Use `chmod +x userscripts_dir/20-SageAttention2.sh` at minimum to allow the `--use-sage-attention` added to the `compose.yaml`. You will see a few other useful scripts there: 00, 05, 11, 15, 21 for example. You might not need all listed scripts; adapt as preferred.
 - Once the preliminary setup is completed, look at the content of the `compose.yaml` and adapt to your requirements; in particular the `WANTED_UID` and `WANTED_GID` or other settings as described in the `README.md`.
 - `docker compose up` should give you access to ComfyUI on `http://localhost:8188`.
 
@@ -1029,6 +1025,13 @@ Some users have reported a warkaround for the issue if it appears:
 
 For more details, see [this thread on the Unraid forum](https://forums.unraid.net/topic/172874-support-comfyui-nvidia-docker/page/5/#findComment-1588490).
 
+### 6.4.4. Updating ComfyUI
+
+A method to update ComfyUI is to force the re-installation of the complete system to the latest version. To do this, take the container down, delete your `run` folder, and recreate a new one. then start a new container. During the initialalization, it will see that the `run` folder does not have ComfyUI or its `venv` and will reinstall it.
+
+An alternate method has you using `USE_NEW_MANAGER=false` and `ENABLE_MANAGER_LEGACY_UI=true`. Then from the `Extensions` menu on the WebUI, access `ComfyUI Manager`, select `Switch ComfyUI` and select the version you want to install. After it is done installing, do not click the `Restart` button. Instead take down your container, and restart it. This is needed for the installation of packages required by the updated `requirements.txt` from the different version of ComfyUI.
+
+For additional details, see [Issue 132](https://github.com/mmartial/ComfyUI-Nvidia-Docker/issues/132).
 
 # 7. Changelog
 
