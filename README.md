@@ -208,10 +208,10 @@ It is recommended that a container monitoring tool be available to watch the log
   - [6.2. Virtual environment](#62-virtual-environment)
   - [6.3. run directory](#63-run-directory)
   - [6.4. using BASE\_DIRECTORY with an outdated ComfyUI](#64-using-base_directory-with-an-outdated-comfyui)
-    - [6.4.1. using a specific ComfyUI version or SHA](#641-using-a-specific-comfyui-version-or-sha)
-    - [6.4.2. Errors with ComfyUI WebUI -- re-installation method with models migration](#642-errors-with-comfyui-webui----re-installation-method-with-models-migration)
-    - [6.4.3. Compatibility Warning: Frontend version ... is outdated](#643-compatibility-warning-frontend-version--is-outdated)
-    - [6.4.4. Updating ComfyUI](#644-updating-comfyui)
+  - [6.5. using a specific ComfyUI version or SHA](#65-using-a-specific-comfyui-version-or-sha)
+  - [6.6. Errors with ComfyUI WebUI -- re-installation method with models migration](#66-errors-with-comfyui-webui----re-installation-method-with-models-migration)
+  - [6.7. Compatibility Warning: Frontend version ... is outdated](#67-compatibility-warning-frontend-version--is-outdated)
+  - [6.8. Updating ComfyUI](#68-updating-comfyui)
 - [7. Changelog](#7-changelog)
 
 # 1. Preamble
@@ -973,7 +973,7 @@ Make sure to change file ownership to the user with the `WANTED_UID` and `WANTED
 
 **After the process complete, you should be presented with the WebUI. Make to delete or rename the script to avoid upgrading ComfyUI at start time, and use ComfyUI Manager instead.**
 
-### 6.4.1. using a specific ComfyUI version or SHA
+## 6.5. using a specific ComfyUI version or SHA
 
 Following the conversation in https://github.com/mmartial/ComfyUI-Nvidia-Docker/issues/32
 Use a `user_script.bash` to install a specific version of ComfyUI
@@ -998,7 +998,7 @@ Make sure to change file ownership to the user with the `WANTED_UID` and `WANTED
 
 **After the process complete, you should be presented with the WebUI. Make sure to delete or rename the script to avoid it being run again.**
 
-### 6.4.2. Errors with ComfyUI WebUI -- re-installation method with models migration
+## 6.6. Errors with ComfyUI WebUI -- re-installation method with models migration
 
 Sometimes a `custom_nodes` might cause the WebUI to fail to start, or error out with a message (ex: `Loading aborted due to error reloading workflow data`). In such cases, it is recommended to start from a brand new `run` and `basedir` folders, since `run` contains ComfyUI and the `venv` (virtual environment) that is required to run the WebUI, and `basedir` contains the `models` and `custom_nodes`. Because we would prefer to not have to redownload the models, the following describes a method to do so, such that you will be able to copy the content of the `models` folder from a `_old ``run` and `basedir` folders to the new ones.
 
@@ -1016,7 +1016,7 @@ From `run_off/custom_nodes`. you will be able to see the list of custom nodes th
 
 Once you are confident that you have migrated content from the old container's folders, you can delete the `run_off` and `basedir_off` folders.
 
-### 6.4.3. Compatibility Warning: Frontend version ... is outdated
+## 6.7. Compatibility Warning: Frontend version ... is outdated
 
 Some users have reported a warkaround for the issue if it appears:
 
@@ -1025,7 +1025,7 @@ Some users have reported a warkaround for the issue if it appears:
 
 For more details, see [this thread on the Unraid forum](https://forums.unraid.net/topic/172874-support-comfyui-nvidia-docker/page/5/#findComment-1588490).
 
-### 6.4.4. Updating ComfyUI
+## 6.8. Updating ComfyUI
 
 A method to update ComfyUI is to force the re-installation of the complete system to the latest version. To do this, take the container down, delete your `run` folder, and recreate a new one. then start a new container. During the initialalization, it will see that the `run` folder does not have ComfyUI or its `venv` and will reinstall it.
 
