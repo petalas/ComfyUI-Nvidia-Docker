@@ -110,19 +110,22 @@ Use the `nvidia-smi` command on your system to obtain the `CUDA Version:` entry.
 The `latest` tag will point to a most up-to-date build (i.e., the most recent OS+CUDA). 
 If this version is incompatible with your container runtime, please see the list of alternative builds.
 
-| tag | aka | note |
-| --- | --- | --- |
-| ubuntu22_cuda12.2-latest | | Ubuntu 22 base image, depreacted as of `20260605` release -- see `Dockerfile/_off` for last used version |
-| ubuntu22_cuda12.3-latest | | To be depreacted in 2026 | 
-| ubuntu22_cuda12.4-latest | | To be depreacted in 2026 | 
-| ubuntu24_cuda12.5-latest | | Ubuntu 24 base image, was `latest` up to `20250320` release |
-| ubuntu24_cuda12.6-latest | | was `latest` up to `20260509` release |
-| ubuntu24_cuda12.8-latest | | was `latest` up to `20260605` release -- minimum required for Blackwell (inc RTX 50xx) hardware (see "Blackwell support" section) |
-| ubuntu24_cuda12.9-latest | `latest` | `latest` as of `20260605` release -- upgrade needed due to ["... Deprecating CUDA 12.8 (Release 2.12)"]https://dev-discuss.pytorch.org/t/introducing-cuda-13-2-and-deprecating-cuda-12-8-release-2-12/3337) |
-| ubuntu24_cuda13.0-latest | | |
-| ubuntu24_cuda13.1-latest | | |
-| ubuntu24_cuda13.2-latest | | |
-| ubuntu24_cuda13.3-latest | | Ubuntu 26 base image, untested |
+| tag | aka | build | note |
+| --- | --- | --- | --- |
+| ubuntu22_cuda12.2-latest | | linux/amd64 | Ubuntu 22 base image, depreacted as of `20260605` release -- see `Dockerfile/_off` for last used version |
+| ubuntu22_cuda12.3-latest | | linux/amd64 | To be depreacted in 2026 | 
+| ubuntu22_cuda12.4-latest | | linux/amd64 | To be depreacted in 2026 | 
+| ubuntu24_cuda12.5-latest | | linux/amd64 | Ubuntu 24 base image, was `latest` up to `20250320` release |
+| ubuntu24_cuda12.6-latest | | linux/amd64 | was `latest` up to `20260509` release |
+| ubuntu24_cuda12.8-latest | | linux/amd64 | was `latest` up to `20260605` release -- minimum required for Blackwell (inc RTX 50xx) hardware (see "Blackwell support" section) |
+| ubuntu24_cuda12.9-latest | `latest` | linux/amd64 | `latest` as of `20260605` release -- upgrade needed due to ["... Deprecating CUDA 12.8 (Release 2.12)"](https://dev-discuss.pytorch.org/t/introducing-cuda-13-2-and-deprecating-cuda-12-8-release-2-12/3337) |
+| ubuntu24_cuda13.0-latest | | linux/amd64 | |
+| ubuntu24_cuda13.1-latest | | linux/amd64 | |
+| ubuntu24_cuda13.2-latest | | linux/amd64 | |
+| ubuntu26_cuda13.3-latest | | linux/amd64 | Ubuntu 26 base image, untested |
+| ubuntu24_cuda13.1-dgx-latest | | linux/arm64 | DGX build, recommended for `onnxruntime` support |
+| ubuntu26_cuda13.2-dgx-latest | | linux/arm64 | DGX build |
+| ubuntu26_cuda13.3-dgx-latest | | linux/arm64 | DGX build, Ubuntu 26 base image |
 
 For more details on driver capabilities and how to update those, please see [Setting up NVIDIA docker & podman (Ubuntu 24.04)](https://www.gkr.one/blg-20240523-u24-nvidia-docker-podman).
 
