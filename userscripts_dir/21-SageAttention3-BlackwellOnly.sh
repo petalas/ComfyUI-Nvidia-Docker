@@ -43,8 +43,8 @@ source /comfy/mnt/venv/bin/activate || error_exit "Failed to activate virtualenv
 
 # --- CHECK EXISTING INSTALLATION ---
 if [ "$FORCE_REINSTALL" = "false" ]; then
-    if pip show sageattention > /dev/null 2>&1; then
-        echo "${LOG_INFO}INFO:${NC} SageAttention is already installed."
+    if pip show sageattn3 > /dev/null 2>&1; then
+        echo "${LOG_INFO}INFO:${NC} SageAttention3 is already installed."
         echo "     (Set FORCE_REINSTALL=true in script to force rebuild/reinstall)"
         exit 0
     fi
